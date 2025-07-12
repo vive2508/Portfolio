@@ -14,14 +14,20 @@ export const SendEmail = async (formdata: FormData) => {
       error: "Invalid message",
     };
   }
-  await resend.emails.send({
-    from: "Contact Form <onboarding@resend.dev>",
-    to: `mdtaqui.jhar@gmail.com`,
-    subject: `${name} From Contact Form.`,
-    reply_to: `${SenderEmail}`,
-    text: `sender email: ${SenderEmail} 
-     ${message}`,
-  });
+  
+  try {
+    await resend.emails.send({
+      from: "Contact Form <onboarding@resend.dev>",
+      to: `krisanth@example.com`, // Replace with your actual email
+      subject: `${name} From Contact Form.`,
+      reply_to: `${SenderEmail}`,
+      text: `sender email: ${SenderEmail} 
+       ${message}`,
+    });
+  } catch (error) {
+    console.error("Email sending failed:", error);
+    // You can handle the error here, maybe show a toast or redirect to an error page
+  }
 
 return redirect('/')
  
